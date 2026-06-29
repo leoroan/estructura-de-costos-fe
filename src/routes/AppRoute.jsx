@@ -1,33 +1,28 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { useUser } from "../context/UserContext.jsx";
-import { ProtectedRoute } from "./ProtectedRoute.jsx";
-
 import Login from "../pages/Login.jsx";
 import Home from "../pages/Home.jsx";
+import Entities from "../pages/Entities.jsx";
+import Configuracion from "../pages/Configuracion.jsx";
+import Costos from "../pages/Costos.jsx";
+import Reportes from "../pages/Reportes.jsx";
+import ParametrosGlobales from "../pages/ParametrosGlobales.jsx";
+import CatalogoInsumos from "../pages/CatalogoInsumos.jsx";
+import Flota from "../pages/Flota.jsx";
+import Personal from "../pages/Personal.jsx";
+import OperacionDirecta from "../pages/OperacionDirecta.jsx";
+import LiquidacionFinanciera from "../pages/LiquidacionFinanciera.jsx";
+import SimuladorSubsidios from "../pages/SimuladorSubsidios.jsx";
 import NotFound from "../pages/NotFound.jsx";
+import { ProtectedRoute } from "./ProtectedRoute.jsx";
 
 export function AppRoute() {
   const { user } = useUser();
 
   return (
     <Routes>
-      {/* Rutas públicas */}
-      <Route
-        path="/login"
-        element={user ? <Navigate to="/" replace /> : <Login />}
-      />
+      <Route path="/login" element={user ? <Navigate to="/" replace /> : <Login />} />
 
-      {/* <Route
-        path="/verificacion-view"
-        element={<VerificacionEmail />}
-      /> */}
-
-      {/* <Route
-        path="/restaurar-password"
-        element={<RestaurarPassword />}
-      /> */}
-
-      {/* Ruta home — todos los roles autenticados */}
       <Route
         path="/"
         element={
@@ -36,48 +31,95 @@ export function AppRoute() {
           </ProtectedRoute>
         }
       />
-
-      {/* Dirección — DIRECTOR y ADMINISTRATIVO (y ADMIN puede verla también) */}
-      {/* <Route
-        path="/direccion"
+      <Route
+        path="/entidades"
         element={
-          <ProtectedRoute requiredRoles={["ADMIN", "DIRECTOR", "ADMINISTRATIVO"]}>
-            <DireccionPage />
+          <ProtectedRoute>
+            <Entities />
           </ProtectedRoute>
         }
-      /> */}
-
-      {/* Admin Dashboard — solo ADMIN */}
-      {/* <Route
-        path="/admin"
+      />
+      <Route
+        path="/configuracion"
         element={
-          <ProtectedRoute requiredRoles={["ADMIN"]}>
-            <AdminDashboard />
+          <ProtectedRoute>
+            <Configuracion />
           </ProtectedRoute>
         }
-      /> */}
-
-      {/* Admin Usuarios — solo ADMIN */}
-      {/* <Route
-        path="/admin/usuarios"
+      />
+      <Route
+        path="/parametros-globales"
         element={
-          <ProtectedRoute requiredRoles={["ADMIN"]}>
-            <AdminUsers />
+          <ProtectedRoute>
+            <ParametrosGlobales />
           </ProtectedRoute>
         }
-      /> */}
-
-      {/* Todotask — módulo disponible por nombre y permiso */}
-      {/* <Route
-        path="/todotask"
+      />
+      <Route
+        path="/catalogo-insumos"
         element={
-          <ProtectedRoute requiredRoles={["ADMIN", "DIRECTOR", "ADMINISTRATIVO"]}>
-            <TodoTaskPage />
+          <ProtectedRoute>
+            <CatalogoInsumos />
           </ProtectedRoute>
         }
-      /> */}
+      />
+      <Route
+        path="/flota"
+        element={
+          <ProtectedRoute>
+            <Flota />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/personal"
+        element={
+          <ProtectedRoute>
+            <Personal />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/operacion-directa"
+        element={
+          <ProtectedRoute>
+            <OperacionDirecta />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/liquidacion-financiera"
+        element={
+          <ProtectedRoute>
+            <LiquidacionFinanciera />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/simulador-subsidios"
+        element={
+          <ProtectedRoute>
+            <SimuladorSubsidios />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/costos"
+        element={
+          <ProtectedRoute>
+            <Costos />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/reportes"
+        element={
+          <ProtectedRoute>
+            <Reportes />
+          </ProtectedRoute>
+        }
+      />
 
-      {/* 404 */}
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
